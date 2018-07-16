@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandradb
+    restart: always
+    ports:
+      - "9042:9042"
+    networks: 
+      - backend
+    volumes: 
+      - cassandra-data:/var/lib/cassandra
+
+networks: 
+  backend:
+    driver: bridge
+
+volumes: 
+  cassandra-data: 
+    
