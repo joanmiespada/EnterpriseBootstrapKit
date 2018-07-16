@@ -1,42 +1,44 @@
-import com.datastax.driver.core.Cluster
-import data.UserData
-import logic.UserLogic
-import models._
-import org.scalatest._
+import java.util.UUID
 
-import scala.concurrent.Await
-import scala.concurrent.duration.Duration
+import data.entity.User
+import org.joda.time.DateTime
 
-class UserSpec extends FlatSpec with Matchers {
+class UserSpec extends CassandraSpec {
+
+  override def beforeAll(): Unit = {
+    super.beforeAll()
+  }
+
+  override def afterAll(): Unit = {
+    super.afterAll()
+  }
 
 
+  "A User" should "stored in cassandra" in {
 
-  "A models.User" should "have an email and password" in {
+    //val user = new UserModel("1234fer" + n.toString , "pepe","jose","pepe@jose.com","asdfg1234")
 
-    val cluster = {
-      Cluster.builder()
-        .addContactPoint("10.110.0.10")
-        // .withCredentials("username", "password")
-        .build()
-    }
+    val future = this.database.store( User( UUID.randomUUID(), Option("name"),Option("surname"),"password","email",DateTime.now()))
 
-    val session = cluster.connect("test")
-
-    val logic = new UserLogic( new UserData(session ) )
-
-    val user = new UserModel("1234fwer", "pepe","jose","pepe@jose.com","asdfg1234")
-
-    val statements ={
+    whenReady(future){ result=>
+      result isExhausted() shouldBe true
 
     }
+    //val logic = new UserLogic( new UserData(session ) )
+    //val data = new UserData(session )
 
-    val res = logic.Create(user)
+    //val user = new UserModel("1234fwer", "pepe","jose","pepe@jose.com","asdfg1234")
 
-    res should be (true)
 
-    Await.ready(statements, Duration.Inf)
 
-    cluster.close()
+
+    //val res = logic.Create(user)
+
+    //res should be (true)
+
+    //Await.result(statements, Duration.Inf)
+
+    //cluster.close()
 
   }
 
