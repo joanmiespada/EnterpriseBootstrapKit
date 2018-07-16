@@ -6,7 +6,7 @@ import data._
 class UserLogic(storage:UserData ) {
 
   def Create(user:UserModel): Boolean = {
-    storage.Save(user)
+    storage.Create(user)
   }
 
   def Update(user:UserModel): Boolean = {
