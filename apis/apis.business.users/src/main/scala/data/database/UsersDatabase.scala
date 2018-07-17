@@ -5,14 +5,15 @@ import com.outworkers.phantom.dsl._
 import scala.concurrent.{Future => ScalaFuture}
 
 import data.entity.User
-import data.model.UsersModel
+import data.repository.UsersRepository
 import data.connector.Connector._
 
 
 
-class UsersDatabase(override val connector: CassandraConnection) extends Database[UsersDatabase](connector)
+class cUsersDatabase(override val connector: CassandraConnection)
+  extends Database[cUsersDatabase](connector)
 {
-    object UsersModel extends UsersModel with connector.Connector
+    object usersTable extends UsersRepository with Connector
 
     //def store(user:User): ScalaFuture[ResultSet] = {
     //    UsersModel.store(user)
@@ -20,4 +21,4 @@ class UsersDatabase(override val connector: CassandraConnection) extends Databas
 
 }
 
-object Database extends UsersDatabase(connector)
+object UsersDatabase extends cUsersDatabase(connection)

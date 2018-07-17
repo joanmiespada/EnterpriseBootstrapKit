@@ -6,7 +6,7 @@ import org.joda.time.DateTime
 
 class UserModel (
           var _Id: UUID = UUID.randomUUID(),
-          var _Name: String = "",
+          var _Name:  String = "",
           var _Surname: String = "",
           var _Email:String = "",
           var _PasswordHash: String = "",

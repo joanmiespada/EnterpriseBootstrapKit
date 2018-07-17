@@ -1,11 +1,12 @@
 package data.connector
 
-import com.outworkers.phantom.connectors.CassandraConnection
-import com.outworkers.phantom.dsl.ContactPoints
+import com.outworkers.phantom.connectors.{CassandraConnection, ContactPoint}
+//import com.outworkers.phantom.dsl.ContactPoints
 
 object Connector {
 
-  lazy val connector: CassandraConnection = ContactPoints(Seq("127.0.0.1")).keySpace("test")
+  //lazy val connector: CassandraConnection = ContactPoints(Seq("127.0.0.1")).keySpace("test")
+  lazy val connection: CassandraConnection = ContactPoint.local.keySpace("test")
 
   /*val connector = ContactPoint.local
     .noHeartbeat()

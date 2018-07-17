@@ -24,5 +24,4 @@ class UserLogic(storage:UserData ) {
     storage.GetByEmail(email)
   }
 
-}
-*/
+}*/

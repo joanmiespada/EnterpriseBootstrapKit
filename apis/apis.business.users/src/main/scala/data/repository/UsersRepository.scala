@@ -1,4 +1,4 @@
-package data.model
+package data.repository
 
 import java.util.UUID
 import com.outworkers.phantom.dsl._
@@ -7,7 +7,7 @@ import scala.concurrent.{Future => ScalaFuture}
 
 import data.entity.User
 
-abstract class UsersModel extends Table[UsersModel,User] //with RootConnector
+abstract class UsersRepository extends Table[UsersRepository,User]
 {
   override def tableName: String = "users"
 
@@ -17,7 +17,7 @@ abstract class UsersModel extends Table[UsersModel,User] //with RootConnector
   object password extends  StringColumn
   object email extends  StringColumn with Index
   object registrationDate extends DateTimeColumn
-/*
+
   def store(user:User): ScalaFuture[ResultSet]={
 
     insert.value(_.id,user.id)
@@ -31,10 +31,10 @@ abstract class UsersModel extends Table[UsersModel,User] //with RootConnector
 
   def getById(id:UUID): ScalaFuture[Option[User]] = {
     select.where(_.id eqs id)
-      .allowFiltering()
+      //.allowFiltering()
       .one()
   }
-
+/*
   def getLimit(limit: Int): ScalaFuture[ResultSet] = {
     select.limit(limit).future()
   }
