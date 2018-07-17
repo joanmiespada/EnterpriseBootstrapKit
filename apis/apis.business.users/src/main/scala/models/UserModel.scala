@@ -1,23 +1,24 @@
 package models
 
-import java.util.UUID
+import java.util.{ UUID}
+
 import org.joda.time.DateTime
 
 
 class UserModel (
           var _Id: UUID = UUID.randomUUID(),
-          var _Name:  String = "",
-          var _Surname: String = "",
+          var _Name:  Option[String],
+          var _Surname: Option[String],
           var _Email:String = "",
           var _PasswordHash: String = "",
           var _RegistrationDate: DateTime = null
           ) {
 
-  def Name:String = _Name
-  def Name_= (newValue: String):Unit ={ _Name = newValue }
+  def Name: Option[String] = _Name
+  def Name_= (newValue: String):Unit ={ _Name = Option(newValue) }
 
-  def Surname:String  = _Surname
-  def Surname_= (newValue: String):Unit ={ _Surname = newValue }
+  def Surname: Option[String]  = _Surname
+  def Surname_= (newValue: String):Unit ={ _Surname = Option(newValue) }
 
   def Id:UUID = _Id
   def Id_= (newValue: UUID):Unit ={ _Id = newValue }
@@ -30,8 +31,8 @@ class UserModel (
 
   def RegistrationDate:DateTime = _RegistrationDate
   def RegistrationDate_= (newValue: DateTime):Unit ={ _RegistrationDate = newValue }
-  //override  def toString():String =
-  //  s"Id: $Id, Name: $_Name, Surname: $_Surname, Email: $_Email"
+
+  override  def toString():String = s"Id: $Id, Name: $Name, Surname: $Surname, Email: $Email"
 
 
 }

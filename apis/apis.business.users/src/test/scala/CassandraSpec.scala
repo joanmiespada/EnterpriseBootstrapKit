@@ -1,12 +1,8 @@
-import com.outworkers.phantom.database.DatabaseProvider
-import data.database.{UsersDatabase, cUsersDatabase}
+package test
+
+import data.database.{ UsersProvider }
 import org.scalatest._
 import org.scalatest.concurrent._
-
-
-trait UsersDbProvider extends DatabaseProvider[cUsersDatabase] {
-  override val database: cUsersDatabase = UsersDatabase
-}
 
 trait CassandraSpec extends AsyncFunSuite// AsyncFlatSpec
   with Matchers
@@ -14,5 +10,5 @@ trait CassandraSpec extends AsyncFunSuite// AsyncFlatSpec
   with ScalaFutures
   with OptionValues
   with BeforeAndAfterAll
-  with UsersDbProvider
+  with UsersProvider
 

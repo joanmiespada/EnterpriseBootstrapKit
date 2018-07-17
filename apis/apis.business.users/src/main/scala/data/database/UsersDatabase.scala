@@ -2,9 +2,6 @@ package data.database
 
 import com.outworkers.phantom.connectors.CassandraConnection
 import com.outworkers.phantom.dsl._
-import scala.concurrent.{Future => ScalaFuture}
-
-import data.entity.User
 import data.repository.UsersRepository
 import data.connector.Connector._
 
@@ -22,3 +19,6 @@ class cUsersDatabase(override val connector: CassandraConnection)
 }
 
 object UsersDatabase extends cUsersDatabase(connection)
+
+
+
